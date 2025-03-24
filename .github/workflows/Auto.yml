@@ -1,0 +1,31 @@
+name: Python Auto run
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install gazpacho pandas
+
+      - name: Python Auto run
+        run: |
+          python mal_scrapper.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: scraping-data
+          path: List/
