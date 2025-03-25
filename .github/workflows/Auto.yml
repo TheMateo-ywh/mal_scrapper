@@ -1,45 +1,42 @@
-name: Python Anime Scraper
+name: Python Auto run
 
 on:
   schedule:
     - cron: "0 5 * * *"
 
 jobs:
-  scrape:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install gazpacho pandas
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install gazpacho pandas
 
-<<<<<<< HEAD
-    - name: Run scraper
-      run: |
-        python mal_scrapper.py
+      - name: Ensure List directory exists
+        run: mkdir -p List
 
-    - name: Commit and push changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add List/
-        git commit -m "Update anime rankings" || echo "No changes to commit"
-        git push
-=======
-      - name: Python Auto run
+      - name: Run Python script
         run: |
           python mal_scrapper.py
+
+      - name: Check List directory contents
+        run: |
+          echo "Listing contents of List directory:"
+          ls -l List
+
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: scraping-data
           path: List/
->>>>>>> parent of eb4f8ec (v3 to v4)
+          retention-days: 7
