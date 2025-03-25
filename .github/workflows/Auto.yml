@@ -2,7 +2,7 @@ name: Python Auto run
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "0 5 * * *"  
   workflow_dispatch:
 
 jobs:
@@ -23,22 +23,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install gazpacho pandas
 
-      - name: Ensure List directory exists
-        run: mkdir -p List
-
       - name: Run Python script
         run: |
           python mal_scrapper.py
 
-      - name: Check List directory contents
-        run: |
-          echo "Listing contents of List directory:"
-          ls -l List
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: scraping-data
-          path: List/*
+          name: anime-rankings
+          path: List/*.csv  # Only upload CSV files
           retention-days: 7
-          if-no-files-found: error
