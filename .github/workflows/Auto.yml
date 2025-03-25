@@ -3,7 +3,6 @@ name: Python Anime Scraper
 on:
   schedule:
     - cron: "0 5 * * *"
-  workflow_dispatch:
 
 jobs:
   scrape:
@@ -26,12 +25,10 @@ jobs:
       run: |
         python mal_scrapper.py
 
-    - name: List directory contents
+    - name: Commit and push changes
       run: |
-        ls -R List
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: anime-rankings
-        path: List/
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add List/
+        git commit -m "Update anime rankings" || echo "No changes to commit"
+        git push
