@@ -21,6 +21,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install gazpacho pandas
 
+<<<<<<< HEAD
     - name: Run scraper
       run: |
         python mal_scrapper.py
@@ -32,3 +33,13 @@ jobs:
         git add List/
         git commit -m "Update anime rankings" || echo "No changes to commit"
         git push
+=======
+      - name: Python Auto run
+        run: |
+          python mal_scrapper.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: scraping-data
+          path: List/
+>>>>>>> parent of eb4f8ec (v3 to v4)
