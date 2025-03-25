@@ -32,5 +32,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add List/*.csv
-          git commit -m "Add new anime rankings" || echo "No changes to commit"
+          git commit -m "Added new ranking" || echo "No changes to commit"
           git push "https://${{ secrets.MATEO_TOKEN }}@github.com/TheMateo-ywh/mal_scrapper.git"
