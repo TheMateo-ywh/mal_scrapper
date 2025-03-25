@@ -27,9 +27,10 @@ jobs:
         run: |
           python mal_scrapper.py
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: anime-rankings
-          path: List/*.csv  # Only upload CSV files
-          retention-days: 7
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add List/*.csv
+          git commit -m "Add new anime rankings" || echo "No changes to commit"
+          git push
