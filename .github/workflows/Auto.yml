@@ -27,10 +27,15 @@ jobs:
         run: |
           python mal_scrapper.py
 
+      - name: Run mean_score script
+        run: |
+          python mean_score.py
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add List/*.csv
+          git add average_rank_per_anime.csv
           git commit -m "Added new ranking" || echo "No changes to commit"
           git push "https://${{ secrets.MATEO_TOKEN }}@github.com/TheMateo-ywh/mal_scrapper.git"
