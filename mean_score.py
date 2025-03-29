@@ -12,7 +12,7 @@ if csv_files:
     dates = []
 
     for file in csv_files:
-        # Extract date from the filename
+        # Extract date from the file
         date_str = file.stem.split('_')[-1]
         dates.append(pd.to_datetime(date_str))
 
