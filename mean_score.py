@@ -2,7 +2,7 @@ import pandas as pd
 import pathlib
 
 list_dir = pathlib.Path('List')
-output_file = list_dir / 'aggregated_results_per_anime.csv'
+output_file ='average_rank_per_anime.csv'
 
 # Collect all CSV files in the directory
 csv_files = sorted(list_dir.glob('mal_anime_rankings_*.csv'))

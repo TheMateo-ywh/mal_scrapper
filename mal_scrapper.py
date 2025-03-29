@@ -29,7 +29,6 @@ text2 = [scrapping(i) for i in cards2]
 text = text1 + text2
 
 if text:
-    # Convert to DataFrame
     df = pd.DataFrame(text)
     
     # Add date column
